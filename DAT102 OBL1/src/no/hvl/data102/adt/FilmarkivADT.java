@@ -1,6 +1,7 @@
 package no.hvl.data102.adt;
 
 import no.hvl.data102.Film;
+import no.hvl.data102.LinearNode;
 import no.hvl.data102.Sjanger;
 
 public interface FilmarkivADT {
@@ -34,7 +35,7 @@ public interface FilmarkivADT {
     * @return tabell med filmer som har delstreng i tittel
     
     */
-    Film[] soekTittel(String delstreng);
+    LinearNode<Film> soekTittel(String delstreng);
    /**
     * Finner antall filmer med gitt sjanger
     * @param sjanger 

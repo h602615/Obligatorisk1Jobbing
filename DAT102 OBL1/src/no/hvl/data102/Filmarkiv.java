@@ -4,31 +4,59 @@ import no.hvl.data102.adt.FilmarkivADT;
 
 public class Filmarkiv implements FilmarkivADT {
 
-	private Filmarkiv[] arkiv;
+	private Film[] arkiv;
 	private int antall;
 
 	
 
-	public Filmarkiv( int antall) {
-		super();
-		Filmarkiv[] arkiv = new Filmarkiv[antall];
 
-		this.antall = antall;
+	public Filmarkiv( int antall) {
+		 this.arkiv = new Film[antall];
+
+		this.antall = 0;
 	}
 
 	@Override
 	public void visFilm(int nr) {
 
+		int n = finn(nr);
+		if(n<0) {
+			return;
+		}
+		
+	
+		Film random = this.arkiv[n];
+		System.out.print(random.toString());
+		
 	}
 
 	@Override
 	public void leggTilFilm(Film nyFilm) {
-
+		if(antall==arkiv.length) {
+			utvid();
+		}
+		
+		for(int i =0;i<antall;i++) {
+			arkiv[antall]=nyFilm;
+			i++;
+		}
+		
+		
 	}
 
 	@Override
 	public boolean slettFilm(int filmnr) {
-		return false;
+			
+		for(int i =0;i>antall;i++) {
+			if(filmnr==arkiv[i].getFilmnr()) {
+				antall--;
+				arkiv[i]=arkiv[antall];
+				arkiv[antall]=null;
+				return true;
+			}
+
+		}
+			return false;
 	}
 
 	@Override

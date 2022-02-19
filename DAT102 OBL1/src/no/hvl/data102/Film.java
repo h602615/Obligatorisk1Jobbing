@@ -25,6 +25,12 @@ public class Film {
 		return filmnr;
 	}
 
+	@Override
+	public String toString() {
+		return "Film [filmnr=" + filmnr + ", filmskaper=" + filmskaper + ", Tittel=" + Tittel + ", Aar=" + Aar
+				+ ", Filmselskap=" + Filmselskap + "]";
+	}
+
 	public void setFilmnr(int filmnr) {
 		this.filmnr = filmnr;
 	}
