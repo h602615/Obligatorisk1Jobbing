@@ -48,6 +48,7 @@ public interface FilmarkivADT {
      */
     int antall();
 	boolean soekFilmprodusent(String delstreng);
+	boolean finnes(int nr);
     
 }
     

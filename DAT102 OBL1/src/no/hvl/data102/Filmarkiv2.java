@@ -110,4 +110,17 @@ public class Filmarkiv2<T> implements FilmarkivADT {
 		return antall;
 	}
 
+	@Override
+	public boolean soekFilmprodusent(String delstreng) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean finnes(int nr) {
+		
+		
+		return false;
+	}
+
 }
