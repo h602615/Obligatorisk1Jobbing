@@ -1,5 +1,7 @@
 package no.hvl.data102;
 
+import java.util.ArrayList;
+
 import no.hvl.data102.adt.FilmarkivADT;
 
 public class Filmarkiv implements FilmarkivADT {
@@ -7,11 +9,8 @@ public class Filmarkiv implements FilmarkivADT {
 	private Film[] arkiv;
 	private int antall;
 
-	
-
-
-	public Filmarkiv( int antall) {
-		 this.arkiv = new Film[antall];
+	public Filmarkiv(int antall) {
+		this.arkiv = new Film[antall];
 
 		this.antall = 0;
 	}
@@ -19,70 +18,86 @@ public class Filmarkiv implements FilmarkivADT {
 	@Override
 	public void visFilm(int nr) {
 
-		int n = finn(nr);
-		if(n<0) {
-			return;
+		for (int i = 0; i < this.antall; i++) {
+			if (nr == this.arkiv[i].getFilmnr()) {
+
+				Film random = this.arkiv[nr];
+				System.out.print(random.toString());
+
+			}
 		}
-		
-	
-		Film random = this.arkiv[n];
-		System.out.print(random.toString());
-		
 	}
 
 	@Override
 	public void leggTilFilm(Film nyFilm) {
-		if(antall==arkiv.length) {
-			utvid();
+		if (antall == arkiv.length) {
+			utvid(arkiv);
 		}
-		
-		for(int i =0;i<antall;i++) {
-			arkiv[antall]=nyFilm;
+
+		for (int i = 0; i < antall; i++) {
+			arkiv[antall] = nyFilm;
 			i++;
 		}
-		
-		
+
 	}
 
 	@Override
 	public boolean slettFilm(int filmnr) {
-			
-		for(int i =0;i>antall;i++) {
-			if(filmnr==arkiv[i].getFilmnr()) {
+
+		for (int i = 0; i > antall; i++) {
+			if (filmnr == arkiv[i].getFilmnr()) {
 				antall--;
-				arkiv[i]=arkiv[antall];
-				arkiv[antall]=null;
+				arkiv[i] = arkiv[antall];
+				arkiv[antall] = null;
 				return true;
 			}
 
 		}
-			return false;
+		return false;
 	}
 
 	@Override
 	public Film[] soekTittel(String delstreng) {
-		return null;
+
+		ArrayList<Film> svar = new ArrayList<Film>();
+
+		for (int i = 0; i < this.antall; i++) {
+			if (this.arkiv[i].getTittel().contains(delstreng)) {
+				svar.add(this.arkiv[i]);
+			}
+		}
+
+		Film[] tabell = new Film[svar.size()];
+		tabell = svar.toArray(tabell);
+		return tabell;
+	
 	}
 
 	@Override
 	public int antall(Sjanger sjanger) {
-		return 0;
-	}
+		int atallSjanger = 0;
+		for (int i = 0; i < this.antall; i++) {
+			if (sjanger == this.arkiv[i].getSjanger()) {
+				atallSjanger++;
+			}
+		}
+
+		return atallSjanger;	}
 
 	@Override
 	public int antall() {
-		return 0;
+		return antall;
 	}
 
-	private Filmarkiv[] utvid(Filmarkiv[] arkiv) {
+	private Film[] utvid(Film[] arkiv) {
 
-		Filmarkiv[] utvidetTabell = new Filmarkiv[2 * arkiv.length];
+		Film[] utvidetTabell = new Film[2 * arkiv.length];
 
 		for (int i = 0; i < antall; i++) {
 			utvidetTabell[i] = arkiv[i];
 
 		}
-		return utvidetTabell;
+		return arkiv = utvidetTabell;
 	}
 
 	private Film[] trimTab(Film[] tab, int n) {
@@ -96,4 +111,29 @@ public class Filmarkiv implements FilmarkivADT {
 		}
 		return nytab;
 	}
+	@Override
+	public String toString() {
+		String s = "";
+		for (int i = 0; i < this.antall; i++) {
+			s += this.arkiv[i].toString() + "\n";
+		}
+		return s;
+	}
+
+	@Override
+	public boolean soekFilmprodusent(String delstreng) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean finnes(int nr) {
+		boolean finnes= false;
+		for (int i = 0; i < antall; i++) {
+			if (nr == arkiv[i].getFilmnr()) {
+				return finnes = true;
+			}
+		}
+		return finnes;
+	}
+
 }

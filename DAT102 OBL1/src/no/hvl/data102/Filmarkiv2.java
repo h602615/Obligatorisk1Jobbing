@@ -1,5 +1,7 @@
 package no.hvl.data102;
 
+import java.util.ArrayList;
+
 import no.hvl.data102.adt.FilmarkivADT;
 
 public class Filmarkiv2<T> implements FilmarkivADT {
@@ -9,7 +11,10 @@ public class Filmarkiv2<T> implements FilmarkivADT {
 	private int antall; 
     private LinearNode<Film> forste; 
 
-		
+    public Filmarkiv2() {
+		this.antall = 0;
+		this.forste = null;
+	}
 
 	public int getAntall() {
 		return antall;
@@ -35,7 +40,14 @@ public class Filmarkiv2<T> implements FilmarkivADT {
 
 	@Override
 	public void visFilm(int nr) {
-		
+		LinearNode<Film> aktuell = forste;
+		while (aktuell != null) {
+			if (nr == aktuell.getElement().getFilmnr()) {
+				System.out.println(aktuell.getElement().toString());
+				return;
+			}
+			aktuell = aktuell.getNeste();
+		}
 	}
 
 	@Override
@@ -66,24 +78,32 @@ public class Filmarkiv2<T> implements FilmarkivADT {
 	}
 
 	
-	public LinearNode<Film> soekTittel(String delstreng) {
-		LinearNode<Film> funnet = null;
-		LinearNode<Film> aktuell = forste;
-		for (int soek = 0; soek < antall ; soek++) {
-			if (aktuell.getElement().equals(delstreng)) {
-				funnet =aktuell; ;
-				 
-			} else {
-				aktuell = aktuell.getNeste();
+	public Film[] soekTittel(String delstreng) {
+		ArrayList<Film> innholder = new ArrayList<Film>();
+
+		LinearNode<Film> curr = this.forste;
+		while (curr != null) {
+			if (curr.getElement().getTittel().contains(delstreng)) {
+				innholder.add(curr.getElement());
 			}
+			curr = curr.getNeste();
 		}
-		return funnet;
+
+		Film[] svar = new Film[innholder.size()];
+		svar = innholder.toArray(svar);
+		return svar;
 	}
 
 	@Override
 	public int antall(Sjanger sjanger) {
-		return antall;
-	}
+		int i = 0;
+		LinearNode<Film> curr = this.forste;
+		while (curr != null) {
+			if (sjanger == curr.getElement().getSjanger()) {
+				i++;
+			}
+		}
+		return i;	}
 
 	@Override
 	public int antall() {

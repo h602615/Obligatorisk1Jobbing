@@ -10,6 +10,15 @@ public class Film {
 	private String filmskaper;
 	private String Tittel;
 	private int Aar;
+	private Sjanger sjanger;
+	public Sjanger getSjanger() {
+		return sjanger;
+	}
+
+	public void setSjanger(Sjanger sjanger) {
+		this.sjanger = sjanger;
+	}
+
 	private String Filmselskap;
 
 	public Film(int filmnr, String filmskaper, String Tittel, int Aar, String Filmselskap) {

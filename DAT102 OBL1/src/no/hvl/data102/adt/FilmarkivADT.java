@@ -35,7 +35,7 @@ public interface FilmarkivADT {
     * @return tabell med filmer som har delstreng i tittel
     
     */
-    LinearNode<Film> soekTittel(String delstreng);
+    Film[] soekTittel(String delstreng);
    /**
     * Finner antall filmer med gitt sjanger
     * @param sjanger 
@@ -47,6 +47,7 @@ public interface FilmarkivADT {
      * @return antall filmer i arkivet
      */
     int antall();
+	boolean soekFilmprodusent(String delstreng);
     
 }
     
